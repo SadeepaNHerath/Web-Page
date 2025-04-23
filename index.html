@@ -1,209 +1,343 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ICET</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  </head>
-  <body>
-      <header class="p-3 text-bg-dark">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-          </a>
-  
-          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Plan</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Places</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-          </ul>
-  
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sri Lanka Travel Guide</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+  <header class="p-3 text-bg-dark sticky-top">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <i class="bi bi-airplane-engines-fill me-2" style="font-size: 1.75rem;"></i>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#home" class="nav-link px-2 text-white" id="homeLink">Home</a></li>
+          <li><a href="#destinations" class="nav-link px-2 text-white" id="destinationsLink">Destinations</a></li>
+          <li><a href="#featured" class="nav-link px-2 text-white" id="featuredLink">Featured</a></li>
+          <li><a href="#about" class="nav-link px-2 text-white" id="aboutLink">About</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" id="searchForm">
+          <div class="input-group">
+            <input type="search" class="form-control form-control-dark" placeholder="Search destinations..."
+              aria-label="Search" id="searchInput">
+            <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+
+        <div class="text-end">
+          <button type="button" class="btn btn-outline-light me-2" data-bs-toggle="modal"
+            data-bs-target="#loginModal">Login</button>
+          <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+            data-bs-target="#signupModal">Sign-up</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Login to Your Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="loginEmail" required>
+            </div>
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="loginPassword" required>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe">
+              <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
           </form>
-  
-          <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2">Login</button>
-            <button type="button" class="btn btn-warning">Sign-up</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="loginButton">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalLabel">Create New Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="signupForm">
+            <div class="mb-3">
+              <label for="signupName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="signupName" required>
+            </div>
+            <div class="mb-3">
+              <label for="signupEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="signupEmail" required>
+            </div>
+            <div class="mb-3">
+              <label for="signupPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="signupPassword" required>
+            </div>
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-warning" id="signupButton">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="home">
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+          aria-label="Slide 4"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="4000">
+          <div class="row g-0">
+            <div class="col-md-3"><img src="img/g1.webp" class="d-block w-100" alt="Galle Fort"></div>
+            <div class="col-md-3"><img src="img/g2.webp" class="d-block w-100" alt="Galle Lighthouse"></div>
+            <div class="col-md-3"><img src="img/g3.webp" class="d-block w-100" alt="Galle Beach"></div>
+            <div class="col-md-3"><img src="img/g4.webp" class="d-block w-100" alt="Galle Streets"></div>
+          </div>
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-2">
+            <h3>Galle <i class="bi bi-camera"></i></h3>
+            <p>Explore the historic Galle Fort, a UNESCO World Heritage site with colonial architecture</p>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <div class="row g-0">
+            <div class="col-md-3"><img src="img/pd1.webp" class="d-block w-100" alt="Point Dondra Lighthouse"></div>
+            <div class="col-md-3"><img src="img/pd2.webp" class="d-block w-100" alt="Point Dondra Coast"></div>
+            <div class="col-md-3"><img src="img/pd3.webp" class="d-block w-100" alt="Point Dondra View"></div>
+            <div class="col-md-3"><img src="img/pd4.webp" class="d-block w-100" alt="Point Dondra Beach"></div>
+          </div>
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-2">
+            <h3>Point Dondra <i class="bi bi-camera2"></i></h3>
+            <p>Visit Sri Lanka's southernmost point with its iconic lighthouse and breathtaking views</p>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <div class="row g-0">
+            <div class="col-md-3"><img src="img/first.webp" class="d-block w-100" alt="Sigiriya Rock"></div>
+            <div class="col-md-3"><img src="img/second.webp" class="d-block w-100" alt="Sigiriya Frescoes"></div>
+            <div class="col-md-3"><img src="img/third.webp" class="d-block w-100" alt="Sigiriya Lions Paw"></div>
+            <div class="col-md-3"><img src="img/fourth.webp" class="d-block w-100" alt="Sigiriya View"></div>
+          </div>
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-2">
+            <h3>Sigiriya <i class="bi bi-camera-fill"></i></h3>
+            <p>Climb the ancient rock fortress and marvel at this 5th-century architectural wonder</p>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="4000">
+          <div class="row g-0">
+            <div class="col-md-3"><img src="img/ph1.webp" class="d-block w-100" alt="Polhena Beach"></div>
+            <div class="col-md-3"><img src="img/ph2.webp" class="d-block w-100" alt="Polhena Reef"></div>
+            <div class="col-md-3"><img src="img/ph3.webp" class="d-block w-100" alt="Polhena Sunset"></div>
+            <div class="col-md-3"><img src="img/ph4.webp" class="d-block w-100" alt="Polhena Wildlife"></div>
+          </div>
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-2">
+            <h3>Polhena <i class="bi bi-tree"></i></h3>
+            <p>Enjoy the pristine beaches and coral reefs perfect for snorkeling and relaxation</p>
           </div>
         </div>
       </div>
-    </header>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
 
-    <div id="carouselExampleCaptions" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <table width="100%">
-        <tr>
-          <td><img src="img/g1.webp" class="d-block w-100" alt="1..."></td>
-          <td><img src="img/g2.webp" class="d-block w-100" alt="2..."></td>
-          <td><img src="img/g3.webp" class="d-block w-100" alt="3..."></td>
-          <td><img src="img/g4.webp" class="d-block w-100" alt="4..."></td>
-        </tr>
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Galle <i class="bi bi-camera"></i> </h5>
-        </div>
-      </table>
-    </div>
-    <div class="carousel-item">
-      <table width="100%">
-        <tr>
-          <td><img src="img/pd1.webp" class="d-block w-100" alt="1..."></td>
-          <td><img src="img/pd2.webp" class="d-block w-100" alt="2..."></td>
-          <td><img src="img/pd3.webp" class="d-block w-100" alt="3..."></td>
-          <td><img src="img/pd4.webp" class="d-block w-100" alt="4..."></td>
-        </tr>
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Point Dondra <i class="bi bi-camera2"></i> </h5>
-        </div>
-      </table>
-    </div>
-    <div class="carousel-item">
-      <table width="100%">
-        <tr>
-          <td><img src="img/first.webp" class="d-block w-100" alt="1..."></td>
-          <td><img src="img/second.webp" class="d-block w-100" alt="2..."></td>
-          <td><img src="img/third.webp" class="d-block w-100" alt="3..."></td>
-          <td><img src="img/fourth.webp" class="d-block w-100" alt="4..."></td>
-        </tr>
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Sigiriya <i class="bi bi-camera-fill"></i> </h5>
-        </div>
-      </table>
-    </div>
-    <div class="carousel-item">
-      <table width="100%">
-        <tr>
-          <td><img src="img/ph1.webp" class="d-block w-100" alt="1..."></td>
-          <td><img src="img/ph2.webp" class="d-block w-100" alt="2..."></td>
-          <td><img src="img/ph3.webp" class="d-block w-100" alt="3..."></td>
-          <td><img src="img/ph4.webp" class="d-block w-100" alt="4..."></td>
-        </tr>
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Polhena <i class="bi bi-tree"></i> </h5>
-        </div>
-      </table>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-<hr>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-3 col-xl-2 col-xxl-2 col-md-6 col-sm-12">
-      <div class="card h-100">
-        <img src="img/1.webp" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+  <div class="container py-5" id="destinations">
+    <h2 class="text-center mb-4">Popular Destinations</h2>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card h-100 shadow-sm destination-card">
+          <img src="img/1.webp" class="card-img-top" alt="Kandy Temple">
+          <div class="card-body">
+            <h5 class="card-title">Temple of the Sacred Tooth Relic</h5>
+            <p class="card-text">Located in Kandy, this Buddhist temple houses the relic of the tooth of Buddha and is a
+              UNESCO World Heritage site.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <button class="btn btn-sm btn-outline-primary">View Details</button>
+              <span class="badge bg-success">Top Attraction</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-3 col-xl-2 col-xxl-2 col-md-6 col-sm-12">
-      <div class="card h-100">
-        <img src="img/2.webp" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a short card.</p>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card h-100 shadow-sm destination-card">
+          <img src="img/2.webp" class="card-img-top" alt="Ella Train">
+          <div class="card-body">
+            <h5 class="card-title">Ella Railway Journey</h5>
+            <p class="card-text">Experience one of the world's most scenic train rides through the lush tea plantations
+              and mountains of Sri Lanka.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <button class="btn btn-sm btn-outline-primary">View Details</button>
+              <span class="badge bg-info">Popular Experience</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-3 col-xl-2 col-xxl-2 col-md-6 col-sm-12">
-      <div class="card h-100">
-        <img src="img/3.webp" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card h-100 shadow-sm destination-card">
+          <img src="img/3.webp" class="card-img-top" alt="Yala National Park">
+          <div class="card-body">
+            <h5 class="card-title">Yala National Park</h5>
+            <p class="card-text">Sri Lanka's most visited wildlife reserve, famous for having one of the highest leopard
+              densities in the world.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <button class="btn btn-sm btn-outline-primary">View Details</button>
+              <span class="badge bg-warning text-dark">Wildlife Safari</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-3 col-xl-2 col-xxl-2 col-md-6 col-sm-12">
-      <div class="card h-100">
-        <img src="img/4.webp" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card h-100 shadow-sm destination-card">
+          <img src="img/4.webp" class="card-img-top" alt="Nuwara Eliya">
+          <div class="card-body">
+            <h5 class="card-title">Nuwara Eliya</h5>
+            <p class="card-text">Known as "Little England," this charming town features cool climate, tea plantations,
+              and colonial architecture.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <button class="btn btn-sm btn-outline-primary">View Details</button>
+              <span class="badge bg-secondary">Mountain Escape</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-3 col-xl-2 col-xxl-2 col-md-6 col-sm-12">
-      <div class="card h-100">
-        <img src="img/5.webp" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card h-100 shadow-sm destination-card">
+          <img src="img/5.webp" class="card-img-top" alt="Mirissa Beach">
+          <div class="card-body">
+            <h5 class="card-title">Mirissa Beach</h5>
+            <p class="card-text">A paradise for beach lovers with golden sands, blue waters, and one of the best
+              whale-watching locations in the world.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <button class="btn btn-sm btn-outline-primary">View Details</button>
+              <span class="badge bg-primary">Beach Getaway</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-3 col-xl-2 col-xxl-2 col-md-6 col-sm-12 ">
-      <div class="card h-100">
-        <img src="img/6.webp" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card h-100 shadow-sm destination-card">
+          <img src="img/6.webp" class="card-img-top" alt="Polonnaruwa">
+          <div class="card-body">
+            <h5 class="card-title">Ancient City of Polonnaruwa</h5>
+            <p class="card-text">The second most ancient kingdom of Sri Lanka featuring 12th-century ruins and
+              impressive stone sculptures.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <button class="btn btn-sm btn-outline-primary">View Details</button>
+              <span class="badge bg-danger">Historical Site</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<hr>
-<div class="container">
 
-  <h1>Deduru Oya, Sri Lanka</h1>
+  <div class="bg-light py-5" id="featured">
+    <div class="container">
+      <h2 class="text-center mb-4">Featured Destination</h2>
 
-  <img src="img/img.webp" class="w-50 mx-auto d-block " alt="Deduru Oya">
-  <p>
-      Deduru Oya, nestled in the verdant landscapes of Sri Lanka, is a picturesque reservoir located in the Kurunegala District. This sprawling body of water, created by the Deduru Oya Dam, serves as a vital source of irrigation and hydroelectric power generation for the region. Surrounding the reservoir, lush forests and rolling hills provide a serene backdrop for leisurely activities such as fishing, birdwatching, and boat rides. The tranquil ambiance and scenic beauty of Deduru Oya attract both locals and tourists seeking respite from the hustle and bustle of urban life. Whether you're exploring its shores or simply soaking in the natural splendor, Deduru Oya offers a peaceful retreat amidst Sri Lanka's breathtaking landscapes.
-  </p>
-</div>
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-end">
-    <li class="page-item disabled">
-      <a class="page-link">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
-<div class="container">
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-      </a>
-      <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Company, Inc</span>
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <img src="img/img.webp" class="img-fluid rounded shadow-sm" alt="Deduru Oya">
+        </div>
+        <div class="col-md-6">
+          <h3 class="mb-3">Deduru Oya, Sri Lanka</h3>
+          <p class="lead">A hidden gem nestled in the Kurunegala District</p>
+          <p>
+            Deduru Oya is a picturesque reservoir located in the verdant landscapes of Sri Lanka. This sprawling body of
+            water, created by the Deduru Oya Dam, serves as a vital source of irrigation and hydroelectric power
+            generation for the region.
+          </p>
+          <p>
+            Surrounding the reservoir, lush forests and rolling hills provide a serene backdrop for leisurely activities
+            such as fishing, birdwatching, and boat rides. The tranquil ambiance and scenic beauty of Deduru Oya attract
+            both locals and tourists seeking respite from the hustle and bustle of urban life.
+          </p>
+          <button class="btn btn-primary mt-3">Plan Your Visit</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-      <i class="bi bi-whatsapp"></i>
-      <i class="bi bi-instagram"></i>      
-      <i class="bi bi-facebook"></i>
-      <i class="bi bi-twitter-x"></i>
-    </ul>
-  </footer>
-</div>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+  <div class="container py-5" id="about">
+    <div class="row">
+      <div class="col-md-8 mx-auto text-center">
+        <h2 class="mb-4">About Sri Lanka Travel Guide</h2>
+        <p class="lead">Your comprehensive resource for exploring the Pearl of the Indian Ocean</p>
+        <p>We are dedicated to showcasing the natural beauty, rich culture, and incredible experiences that Sri Lanka
+          has to offer. From pristine beaches to ancient temples, wildlife safaris to tea plantations, our travel guide
+          will help you plan the perfect Sri Lankan adventure.</p>
+        <button class="btn btn-outline-secondary mt-3">Contact Us</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+          <i class="bi bi-airplane-engines-fill" style="font-size: 1.5rem;"></i>
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Sri Lanka Travel Guide</span>
+      </div>
+
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-body-secondary fs-4" href="#"><i class="bi bi-whatsapp"></i></a></li>
+        <li class="ms-3"><a class="text-body-secondary fs-4" href="#"><i class="bi bi-instagram"></i></a></li>
+        <li class="ms-3"><a class="text-body-secondary fs-4" href="#"><i class="bi bi-facebook"></i></a></li>
+        <li class="ms-3"><a class="text-body-secondary fs-4" href="#"><i class="bi bi-twitter-x"></i></a></li>
+      </ul>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
+    </script>
+  <script src="app.js"></script>
+</body>
+
 </html>
